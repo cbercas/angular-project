@@ -1,0 +1,115 @@
+<div class="container-fluid"> <!--asegura que el diseño ocupa todo el ancho de la pantalla-->
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Listado de Tareas</h3>
+    </div>
+    <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Prioridad</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Fecha Expiración</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!--    @for(task of taskList; track task.id) {
+                    @if (!task.isDelete) {
+                    <tr>
+                        <th scope="row"> {{ task.id}} </th>
+                        <td> {{ task.name}} </td>
+                        <td> {{task.description}} </td>
+
+                        @switch (task.priority) {
+                          @case("H"){
+                            <td> Alta </td>
+                          }
+                          @case("M"){
+                            <td>Media</td>
+                          }
+                          @case("L"){
+                            <td>Baja</td>
+                          }
+                        }
+
+                        @switch(task.status){
+                          @case("C"){
+                            <td>Completada</td>
+                          }
+                          @case("IP"){
+                            <td>En proceso</td>
+                          }
+                          @case("P"){
+                            <td>Pendiente</td>
+                          }
+                        }
+
+                        <td> {{task.expirationDate}}</td>
+                        <td>iconos</td>
+                      </tr>
+                    }
+
+                    }-->
+
+              <tr  *ngFor="let task of taskList">
+                <ng-container  *ngIf="task.isDelete != true">
+                <!--  <th scope ="row">{{task-id}}</th> -->
+
+                  <td >{{task.name}}</td>
+
+                  <td>{{task.description}}</td>
+
+                  <td [ngClass]="{'table-danger': task.priority=='H','table-success':task.priority=='L','table-warning':task.priority=='M'}">
+                    <span *ngIf="(task.priority=='L' || task.priority=='M') && task.status != 'C'" >&nbsp;</span>
+                    <i *ngIf="(task.priority=='L' || task.priority=='M') && task.status != 'C'"  class="bi bi-arrow-up-circle-fill" (click)="raiseTaskPriority(task.id)"></i>
+
+                    <span *ngIf="(task.priority=='H' || task.priority=='M') && task.status != 'C'" >&nbsp;</span>
+                    <i *ngIf="(task.priority=='H' || task.priority=='M') && task.status != 'C'" class="bi bi-arrow-down-circle-fill" (click)="lowerTaskPriority(task.id)"></i>
+
+                    {{task.getPriorityText()}}
+                  </td>
+
+                  <!--
+                  <td[ngSwitch="task.priority"]>
+                    <span *ngSwitchCase = "H">Alta </span>
+                    <span *ngSwitchCase = "M">Media </span>
+                    <span *ngSwitchCase = "L">Baja </span>
+                  </td>
+                  -->
+
+                    <td [ngClass]="{'table-danger': task.status=='P','table-success':task.status=='C','table-warning':task.status=='IP'}">
+                    <span *ngIf="task.status=='P'">&nbsp;</span>
+                    <i [ngClass]="{'bi bi-play-fill': task.status=='P'}" (click)="changeTaskStatus(task.id)"></i>
+
+                    <span *ngIf="task.status=='IP'">&nbsp;</span>
+                    <i [ngClass]="{'bi bi-check-lg': task.status=='IP'}" (click)="changeTaskStatus(task.id)"></i>
+
+                    <span *ngIf="task.status=='C'">&nbsp;</span>
+                    <i [ngClass]="{'bi bi-arrow-return-right': task.status=='C'}" (click)="changeTaskStatus(task.id)"></i>
+                    {{task.getStatusText()}}
+                  </td>
+
+                  <td>{{task.expirationDate}}</td>
+
+                  <td>
+                      <span>&nbsp;</span>
+                      <i class="bi bi-pencil-square" (click)="editTask(task.id)"></i>
+
+                      <span>&nbsp;</span>
+                      <i class="bi bi-trash" (click)="deleteTask(task.id)"></i>
+                  </td>
+
+                </ng-container>
+
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+  </div>
