@@ -11,15 +11,11 @@ import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavbarComponent,FooterComponent,TasklistComponent,RouterOutlet],
+  imports: [RouterOutlet,NavbarComponent,FooterComponent,TasklistComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 
 export class AppComponent {
-  title = 'angular-project';
-  nombre = 'Cristina'
-
-
-
+  title = 'angular-project-ci-app';
 }
