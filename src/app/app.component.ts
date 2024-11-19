@@ -17,5 +17,5 @@ import { BrowserModule } from '@angular/platform-browser';
 })
 
 export class AppComponent {
-  title = 'angular-project-ci-app';
+  title = 'Nuevo titulo';
 }
