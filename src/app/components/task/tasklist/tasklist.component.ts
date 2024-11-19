@@ -36,13 +36,16 @@ export class TasklistComponent implements OnInit{
     let tarea:Task = this.getTask(taskId)[0];
     tarea.lowerPriority();
   }
+
   changeTaskStatus(taskId:number){
     let tarea:Task = this.getTask(taskId)[0];
     tarea.changeStatus();
   }
+
   editTask(taskId:number){
    console.log(`Editing Task with identify ${taskId}`);
   }
+
   deleteTask(taskId:number){
     this.taskList = this.taskList.filter((tarea:Task)=>{
       return tarea.id != taskId;
